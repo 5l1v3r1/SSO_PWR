@@ -18,7 +18,7 @@ int main(int argc, char const *argv[]){
 
     char buffer[1024] = {0}; 
 
-	char *servermessage="Server received message: ";
+	const char *servermessage="Server received message: ";
        
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0){ 
 
@@ -69,10 +69,7 @@ int main(int argc, char const *argv[]){
 
 	while(1){
 
-		for(int i=0;i<1024;++i){
-		
-			buffer[i]=0;
-		}
+		for(int i=0;i<1024;++i)buffer[i]=0;
 
 		valread = read( new_socket , buffer, 1024); 
 
@@ -80,7 +77,7 @@ int main(int argc, char const *argv[]){
 
 		send(new_socket , servermessage , strlen(servermessage) , 0 ); 
 
-		send(new_socket , buffer , strlen(buffer) , 0 ); 
+		send(new_socket , buffer , valread , 0 ); 
 	}
 
 
