@@ -61,7 +61,7 @@ void *fthread1(void *argp){
 	pthread_mutex_lock(&mtx);
 
     // heading into monitor loop, we own the predicate mutex
-    while (1){
+    while (1) {
         // check predicate
         while (acc1<=0){
             pthread_cond_wait(&cv, &mtx);
@@ -98,8 +98,7 @@ void *fthread2(void *argp){
 	pthread_mutex_lock(&mtx);
 
     // heading into monitor loop, we own the predicate mutex
-    while (1)
-    {
+    while (1) {
         // check predicate
         while (acc2<=0){
             pthread_cond_wait(&cv, &mtx);
@@ -108,8 +107,7 @@ void *fthread2(void *argp){
 
         // some state that is part of the predicate to 
         // inform us we're finished
-        if (0)
-            break;
+        if (0) break;
 
         przelew(&acc2,&acc3,1);
 
@@ -137,8 +135,7 @@ void *fthread3(void *argp){
 	pthread_mutex_lock(&mtx);
 
     // heading into monitor loop, we own the predicate mutex
-    while (1)
-    {
+    while (1) {
         // check predicate
         while (acc3<=0){
 			printf("Waiting for $ on account 3...\n");
@@ -147,8 +144,7 @@ void *fthread3(void *argp){
 
         // some state that is part of the predicate to 
         // inform us we're finished
-        if (0)
-            break;
+        if (0) break;
 
         przelew(&acc3,&acc1,1);
 
@@ -197,7 +193,6 @@ int main(){
 	pthread_join(pt1, NULL);
 
 	pthread_join(pt2, NULL);
-
 
 	return 0;
 }
