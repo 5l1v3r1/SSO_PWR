@@ -61,8 +61,7 @@ void *fthread1(void *argp){
 	pthread_mutex_lock(&mtx);
 
     // heading into monitor loop, we own the predicate mutex
-    while (1)
-    {
+    while (1){
         // check predicate
         while (acc1<=0){
             pthread_cond_wait(&cv, &mtx);
@@ -71,8 +70,7 @@ void *fthread1(void *argp){
 
         // some state that is part of the predicate to 
         // inform us we're finished
-        if (0)
-            break;
+        if (0) break;
 
         przelew(&acc1,&acc2,1);
 
