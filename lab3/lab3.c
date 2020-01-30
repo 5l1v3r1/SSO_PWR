@@ -2,10 +2,10 @@
 #include <pthread.h> 
 #include <semaphore.h> 
 #include <unistd.h> 
-#include  <sys/types.h>
-#include  <sys/ipc.h>
-#include  <sys/shm.h>
-#include  <stdio.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <stdio.h>
 
 void move(int *acc1,int *acc2,int amount,sem_t *mutex){
 
@@ -21,14 +21,15 @@ void move(int *acc1,int *acc2,int amount,sem_t *mutex){
   
 int main() { 
 
-
 	int shm_id;
 
 	shm_id = shmget(IPC_PRIVATE, 4*sizeof(int), IPC_CREAT | 0666);
 
 	if (shm_id < 0) {
-     	printf("shmget error.\n");
-     	exit(1);
+		
+     		printf("shmget error.\n");
+		
+     		exit(1);
 	}
 
 	int shm_wid;
@@ -36,8 +37,10 @@ int main() {
 	shm_wid = shmget(IPC_PRIVATE, 4*sizeof(int), IPC_CREAT | 0666);
 
 	if (shm_wid < 0) {
-     	printf("shmget error.\n");
-     	exit(1);
+		
+     		printf("shmget error.\n");
+		
+     		exit(1);
 	}
 
 	int mutex;
@@ -45,8 +48,10 @@ int main() {
 	mutex = shmget(IPC_PRIVATE, sizeof(sem_t), IPC_CREAT | 0666);
 
 	if (mutex < 0) {
-     	printf("shmget error.\n");
-     	exit(1);
+		
+     		printf("shmget error.\n");
+		
+     		exit(1);
 	}
 
 	if(fork()==0){
@@ -69,7 +74,7 @@ int main() {
 			printf("Account 1 has %d $ and account 2 has %d $ (in child).\n",*ptr,*wtr); 
 		}
 
-		printf("FInished transferring in child.\n");
+		printf("Finished transferring in child.\n");
 		
 		sem_unlink(mx);
 		
@@ -91,10 +96,9 @@ int main() {
 		printf("Account 1 has %d $ and account 2 has %d $ (in parent).\n",*ptr,*wtr); 
 	}
 
-	printf("FInished transferring in parent.\n");
+	printf("Finished transferring in parent.\n");
 
 	sem_unlink(mx);
-
 
 	wait(NULL);
 
